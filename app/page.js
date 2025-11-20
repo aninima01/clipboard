@@ -10,13 +10,16 @@ export default function Home() {
 
   const saveSnippet = async () => {
     console.log("snippet", snippet);
-    const response = await fetch("/api/snippets", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ snippet }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/snippets`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ snippet }),
+      }
+    );
 
     const createdSnippet = await response.json();
     router.push(`/snippets/${createdSnippet.slug}`);
